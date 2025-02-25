@@ -2,7 +2,7 @@ import { Box, Container, Typography, Button, Grid, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import editorImage from '../assets/resume_editor_interface.jpeg';
-import editorImage1 from '../assets/r6.png';
+import editorImage1 from '../assets/r1.webp';
 const HeroContainer = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
