@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography, IconButton, Link, Divider } from '@mui/material';
+import { Box, Container, Grid, Typography, IconButton, Link, Divider, TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Facebook, Twitter, LinkedIn, Instagram, GitHub } from '@mui/icons-material';
 import { motion } from 'framer-motion';
@@ -133,20 +133,49 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
-                Download App
+                Stay Updated
               </Typography>
-              <Box
-                component="img"
-                src="https://via.placeholder.com/120x40?text=App+Store"
-                alt="App Store"
-                sx={{ mb: 1, cursor: 'pointer' }}
-              />
-              <Box
-                component="img"
-                src="https://via.placeholder.com/120x40?text=Play+Store"
-                alt="Play Store"
-                sx={{ cursor: 'pointer' }}
-              />
+              <Typography variant="body2" sx={{ color: '#666666', mb: 2 }}>
+                Subscribe to our newsletter for the latest resume tips and career advice.
+              </Typography>
+              <Box component="form" noValidate>
+                <TextField
+                  fullWidth
+                  placeholder="Enter your email"
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    mb: 2,
+                    '& .MuiOutlinedInput-root': {
+                      backgroundColor: '#ffffff',
+                      '& fieldset': {
+                        borderColor: 'rgba(33, 150, 243, 0.2)',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#2196F3',
+                      },
+                    },
+                  }}
+                />
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    background: 'linear-gradient(45deg, #2196F3, #1976D2)',
+                    color: '#ffffff',
+                    py: 1,
+                    textTransform: 'none',
+                    '&:hover': {
+                      background: 'linear-gradient(45deg, #1976D2, #1565C0)',
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 4px 12px rgba(33, 150, 243, 0.3)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Subscribe
+                </Button>
+              </Box>
             </FooterSection>
           </Grid>
         </Grid>

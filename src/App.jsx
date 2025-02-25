@@ -8,8 +8,12 @@ import Roadmap from './components/Roadmap';
 import Footer from './components/Footer';
 import Reviews from './components/Reviews';
 import FAQ from './components/FAQ';
-import BulletPointDemo from './components/BulletPointDemo';
-import CoverLetterDemo from './components/CoverLetterDemo';
+import Statistics from './components/Statistics';
+import React from 'react';
+import CallToAction from './components/CallToAction';
+import CoverLetterShowcase from './components/CoverLetterShowcase';
+import CompanyShowcase from './components/CompanyShowcase';
+import Categories from './components/Categories';
 
 const theme = createTheme({
   palette: {
@@ -60,12 +64,15 @@ function App() {
       <ParallaxProvider>
         <Navbar />
         <Hero />
-        <Roadmap />
+        <CompanyShowcase />
+        <Statistics />
         <Features />
-        <BulletPointDemo />
-        <CoverLetterDemo />
         <ResumeCarousel />
+        <CoverLetterShowcase />
+        <Categories />
+        <Roadmap />
         <Reviews />
+        <CallToAction />
         <FAQ />
         <Footer />
       </ParallaxProvider>

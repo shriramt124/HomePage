@@ -1,19 +1,17 @@
-import { Box, Container, Typography, Button, Grid } from '@mui/material';
-import { ParallaxBanner, useParallax } from 'react-scroll-parallax';
-import { styled } from '@mui/material/styles';
-import { useEffect, useRef } from 'react';
+import { Box, Container, Typography, Button, Grid, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
-
-const HeroButton = styled(Button)({
-  padding: '12px 24px',
-  fontSize: '1.1rem',
-  marginTop: '2rem',
-  textTransform: 'none',
-  background: 'linear-gradient(45deg, #2196F3, #1976D2)',
-  '&:hover': {
-    background: 'linear-gradient(45deg, #1976D2, #1565C0)',
-  },
-});
+import { styled } from '@mui/material/styles';
+import editorImage from '../assets/resume_editor_interface.jpeg';
+import editorImage1 from '../assets/r6.png';
+const HeroContainer = styled(Box)(({ theme }) => ({
+  minHeight: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  position: 'relative',
+  overflow: 'hidden',
+  backgroundColor: '#ffffff',
+  paddingTop: theme.spacing(8),
+}));
 
 const FloatingElement = styled(motion.div)({
   position: 'absolute',
@@ -23,174 +21,198 @@ const FloatingElement = styled(motion.div)({
   border: '1px solid rgba(255, 255, 255, 0.1)',
 });
 
-const InteractiveBox = styled(motion.div)({
-  position: 'absolute',
-  right: '5%',
-  top: '50%',
-  transform: 'translateY(-50%)',
-  width: '45%',
-  height: '70%',
-  perspective: '1000px',
-  '& .card': {
-    width: '100%',
-    height: '100%',
-    position: 'relative',
-    transformStyle: 'preserve-3d',
-    borderRadius: '20px',
-    background: 'rgba(255, 255, 255, 0.1)',
-    backdropFilter: 'blur(8px)',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    boxShadow: '0 25px 45px rgba(0, 0, 0, 0.1)',
-    overflow: 'hidden',
+const EditorPreview = styled(Paper)(({ theme }) => ({
+  position: 'relative',
+  padding: theme.spacing(2),
+  borderRadius: '16px',
+  background: '#ffffff',
+  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+  overflow: 'hidden',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '4px',
+    background: 'linear-gradient(90deg, #2196F3, #1976D2)',
   },
+}));
+
+const StatsBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  gap: theme.spacing(4),
+  marginTop: theme.spacing(4),
+  marginBottom: theme.spacing(4),
+}));
+
+const StatItem = styled(Box)({
+  textAlign: 'center',
 });
 
 const Hero = () => {
-  const { ref } = useParallax({ speed: -10 });
-  const boxRef = useRef(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!boxRef.current) return;
-      const rect = boxRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const rotateX = (y - rect.height / 2) / 20;
-      const rotateY = (rect.width / 2 - x) / 20;
-      boxRef.current.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    };
-
-    const handleMouseLeave = () => {
-      if (!boxRef.current) return;
-      boxRef.current.style.transform = 'rotateX(0deg) rotateY(0deg)';
-    };
-
-    const card = boxRef.current;
-    if (card) {
-      card.addEventListener('mousemove', handleMouseMove);
-      card.addEventListener('mouseleave', handleMouseLeave);
-    }
-
-    return () => {
-      if (card) {
-        card.removeEventListener('mousemove', handleMouseMove);
-        card.removeEventListener('mouseleave', handleMouseLeave);
-      }
-    };
-  }, []);
-
   return (
-    <Box
-      sx={{
-        backgroundColor: '#ffffff',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'radial-gradient(circle at 30% 50%, rgba(33, 150, 243, 0.05) 0%, rgba(255, 255, 255, 0) 70%)',
-          zIndex: 0,
-        },
-      }}
-    >
-      <Container sx={{ position: 'relative', zIndex: 2 }}>
-        <FloatingElement
-          animate={{
-            y: [0, 20, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          sx={{
-            width: '150px',
-            height: '150px',
-            left: '-5%',
-            top: '20%',
-          }}
-        />
-        <FloatingElement
-          animate={{
-            y: [0, -30, 0],
-            rotate: [0, -8, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          sx={{
-            width: '100px',
-            height: '100px',
-            left: '10%',
-            bottom: '10%',
-          }}
-        />
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6} ref={ref}>
-            <Typography
-              variant="h1"
-              sx={{
-                color: '#333333',
-                fontSize: { xs: '2.5rem', md: '3.5rem' },
-                fontWeight: 700,
-                marginBottom: '1rem',
-                lineHeight: 1.2,
-              }}
+    <HeroContainer>
+      <FloatingElement
+        style={{
+          width: '300px',
+          height: '300px',
+          top: '10%',
+          left: '-150px',
+          opacity: 0.5,
+        }}
+        animate={{
+          y: [0, 50, 0],
+          rotate: [0, 180, 360],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: 'linear',
+        }}
+      />
+      <FloatingElement
+        style={{
+          width: '200px',
+          height: '200px',
+          bottom: '10%',
+          right: '-100px',
+          opacity: 0.3,
+        }}
+        animate={{
+          y: [0, -30, 0],
+          rotate: [360, 180, 0],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: 'linear',
+        }}
+      />
+      <Container>
+        <Grid container spacing={6} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              Transform Your Career with AI-Powered Resumes
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{
-                color: '#666666',
-                marginBottom: '2rem',
-                fontSize: { xs: '1.2rem', md: '1.5rem' },
-                lineHeight: 1.6,
-              }}
+              <Typography
+                variant="h1"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  fontWeight: 700,
+                  mb: 2,
+                  background: 'linear-gradient(45deg, #2196F3, #1976D2)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Create Your Perfect Resume with AI
+              </Typography>
+              <Typography
+                variant="h5"
+                sx={{
+                  color: '#666666',
+                  mb: 3,
+                  lineHeight: 1.6,
+                }}
+              >
+                Transform your career with our AI-powered resume builder. Get professionally crafted resumes tailored to your industry in minutes.
+              </Typography>
+
+              <StatsBox>
+                <StatItem>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      fontWeight: 700,
+                      color: '#2196F3',
+                      mb: 1,
+                    }}
+                  >
+                    90%
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    Success Rate
+                  </Typography>
+                </StatItem>
+                <StatItem>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      fontWeight: 700,
+                      color: '#2196F3',
+                      mb: 1,
+                    }}
+                  >
+                    2M+
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    Users
+                  </Typography>
+                </StatItem>
+                <StatItem>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      fontWeight: 700,
+                      color: '#2196F3',
+                      mb: 1,
+                    }}
+                  >
+                    24/7
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    Support
+                  </Typography>
+                </StatItem>
+              </StatsBox>
+
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  py: 1.5,
+                  px: 4,
+                  fontSize: '1.1rem',
+                  textTransform: 'none',
+                  borderRadius: '8px',
+                  background: 'linear-gradient(45deg, #2196F3, #1976D2)',
+                  boxShadow: '0 4px 12px rgba(33, 150, 243, 0.2)',
+                  '&:hover': {
+                    boxShadow: '0 6px 16px rgba(33, 150, 243, 0.3)',
+                  },
+                }}
+              >
+                Get Started Free
+              </Button>
+            </motion.div>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              Create professional resumes instantly with our AI technology. Import your LinkedIn profile, get smart suggestions, and optimize for ATS systems.
-            </Typography>
-            <HeroButton
-              variant="contained"
-              size="large"
-            >
-              Start Building Now
-            </HeroButton>
+              <EditorPreview elevation={3}>
+                <Box
+                  component="img"
+                  src={editorImage1}
+                  alt="Resume Editor Interface"
+                  sx={{
+                    width: '100%',
+                    height: 'auto',
+                    borderRadius: '8px',
+                    transform: 'scale(1.02)',
+                  }}
+                />
+              </EditorPreview>
+            </motion.div>
           </Grid>
         </Grid>
       </Container>
-      <InteractiveBox>
-        <motion.div
-          className="card"
-          ref={boxRef}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(33, 150, 243, 0.1) 100%)',
-              zIndex: 1,
-            }}
-          />
-        </motion.div>
-      </InteractiveBox>
-    </Box>
+    </HeroContainer>
   );
 };
 

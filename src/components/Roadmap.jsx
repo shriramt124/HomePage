@@ -4,21 +4,27 @@ import { styled } from '@mui/material/styles';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
 import { Description, Edit, Speed, Work, CheckCircle } from '@mui/icons-material';
 
-const RoadmapContainer = styled(Box)({
-  backgroundColor: '#f8f9fa',
+const RoadmapContainer = styled(Box)(({ theme }) => ({
+  background: 'linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%)',
   padding: '6rem 0',
   position: 'relative',
   overflow: 'hidden',
-});
+  [theme.breakpoints.down('sm')]: {
+    padding: '4rem 0',
+  },
+}));
 
-const GlowingOrb = styled(motion.div)({
+const GlowingOrb = styled(motion.div)(({ theme }) => ({
   position: 'absolute',
-  width: '300px',
-  height: '300px',
+  width: { xs: '200px', md: '300px' },
+  height: { xs: '200px', md: '300px' },
   borderRadius: '50%',
   background: 'radial-gradient(circle at center, rgba(33, 150, 243, 0.15), transparent 70%)',
   filter: 'blur(40px)',
-});
+  [theme.breakpoints.down('sm')]: {
+    display: 'none',
+  },
+}));
 
 const StyledTimelineItem = styled(TimelineItem)({
   '&::before': {
@@ -26,18 +32,38 @@ const StyledTimelineItem = styled(TimelineItem)({
   },
 });
 
-const StyledPaper = styled(Paper)({
+const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: '24px',
   background: 'rgba(255, 255, 255, 0.8)',
   backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
+  border: '1px solid rgba(33, 150, 243, 0.1)',
   borderRadius: '16px',
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-  transition: 'transform 0.3s ease-in-out',
+  boxShadow: '0 8px 32px rgba(33, 150, 243, 0.1)',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  position: 'relative',
+  overflow: 'hidden',
   '&:hover': {
     transform: 'translateY(-5px)',
+    boxShadow: '0 12px 48px rgba(33, 150, 243, 0.2)',
+    '&::before': {
+      transform: 'translateX(100%)',
+    },
   },
-});
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: 'linear-gradient(120deg, transparent 0%, transparent 25%, rgba(33, 150, 243, 0.1) 50%, transparent 75%, transparent 100%)',
+    transform: 'translateX(-100%)',
+    transition: 'transform 0.6s ease-in-out',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '16px',
+  },
+}));
 
 const roadmapSteps = [
   {
