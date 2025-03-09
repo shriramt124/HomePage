@@ -197,7 +197,7 @@ const Footer = () => {
             <FooterLink href="#" sx={{ mr: 3 }}>
               Terms of Service
             </FooterLink>
-            <FooterLink href="#">
+            <FooterLink href="/privacy">
               Privacy Policy
             </FooterLink>
           </Box>
