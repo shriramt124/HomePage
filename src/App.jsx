@@ -1,83 +1,23 @@
-import { ParallaxProvider } from 'react-scroll-parallax';
-import { ThemeProvider, createTheme } from '@mui/material';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import ResumeCarousel from './components/ResumeCarousel';
-import Roadmap from './components/Roadmap';
-import Footer from './components/Footer';
-import Reviews from './components/Reviews';
-import FAQ from './components/FAQ';
-import Statistics from './components/Statistics';
-import React from 'react';
-import CallToAction from './components/CallToAction';
-import CoverLetterShowcase from './components/CoverLetterShowcase';
-import CompanyShowcase from './components/CompanyShowcase';
-import Categories from './components/Categories';
-
-const theme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#2196F3',
-      light: '#64B5F6',
-      dark: '#1976D2'
-    },
-    secondary: {
-      main: '#FF4081',
-      light: '#FF80AB',
-      dark: '#F50057'
-    },
-    background: {
-      default: '#ffffff',
-      paper: '#f5f5f5'
-    },
-    text: {
-      primary: '#333333',
-      secondary: '#666666'
-    }
-  },
-  typography: {
-    fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
-    h1: {
-      fontWeight: 600
-    },
-    h2: {
-      fontWeight: 600
-    },
-    h5: {
-      fontWeight: 500
-    },
-    button: {
-      textTransform: 'none',
-      fontWeight: 500
-    }
-  },
-  shape: {
-    borderRadius: 8
-  }
-});
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Home from "./pages/Home"
+import FaqPage from './pages/FaqPage'
+import ContactUsPage from './pages/ContactUsPage'
+import PrivacyPolicyPage from './pages/Privacy'
+import RightOfWithdrawalPage from './pages/RightOfWithdrawal'
+import TermsOfServicePage from './pages/TermsOfService'
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <ParallaxProvider>
-        <Navbar />
-        <Hero />
-        <CompanyShowcase />
-        <Statistics />
-        <Features />
-        <ResumeCarousel />
-        <CoverLetterShowcase />
-        <Categories />
-        <Roadmap />
-        <Reviews />
-        <CallToAction />
-        <FAQ />
-        <Footer />
-      </ParallaxProvider>
-    </ThemeProvider>
-  );
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/faq' element={<FaqPage />} />
+      <Route path="/contact-us" element={<ContactUsPage />} />
+      <Route path="/privacy" element={<PrivacyPolicyPage />} />
+      <Route path="/right-of-withdrawal" element={<RightOfWithdrawalPage />} />
+      <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+    </Routes>
+  )
 }
 
-export default App;
+export default App

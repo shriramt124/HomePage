@@ -118,7 +118,7 @@ const Footer = () => {
                 </Typography>
                 {section.links.map((link) => (
                   <Typography key={link} variant="body2" sx={{ mb: 1 }}>
-                    <FooterLink href="#">{link}</FooterLink>
+                    <FooterLink href={`${link === "Privacy Policy" ? "/privacy" :"#"}`}>{link}</FooterLink>
                   </Typography>
                 ))}
               </FooterSection>
