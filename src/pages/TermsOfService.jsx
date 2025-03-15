@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-function TermsOfServicePage() {
+function TermsAndConditions() {
     const [activeSection, setActiveSection] = useState(null);
     const [showBackToTop, setShowBackToTop] = useState(false);
 
@@ -35,53 +35,71 @@ function TermsOfServicePage() {
 
     const policySections = [
         {
-            id: 'introduction',
-            title: 'Introduction',
-            icon: '📄',
-            content: 'Welcome to resume.io. By accessing or using our website, you agree to be bound by these Terms of Service. Please read these terms carefully before using our services.'
-        },
-        {
             id: 'account-registration',
             title: 'Account Registration',
             icon: '👤',
-            content: 'To access certain features of our service, you must register for an account. You agree to provide accurate and complete information during registration and to keep your account credentials secure.'
+            content: (
+                <>
+                    <p>Users must provide accurate information during sign-up.</p>
+                    <ul className="list-disc ml-6 mt-2">
+                        <li>Account sharing or resale is strictly prohibited</li>
+                    </ul>
+                </>
+            )
         },
         {
-            id: 'user-obligations',
-            title: 'User Obligations',
-            icon: '✅',
-            content: 'You agree to use our services only for lawful purposes and in accordance with these Terms. You are responsible for all activity that occurs under your account and must notify us immediately of any unauthorized use.'
+            id: 'service-use',
+            title: 'Use of Services',
+            icon: '🛠️',
+            content: (
+                <>
+                    <p>HireMeAI provides AI-powered resume-building tools and career services.</p>
+                    <ul className="list-disc ml-6 mt-2">
+                        <li>Users agree not to misuse or manipulate AI-generated content for unlawful purposes</li>
+                    </ul>
+                </>
+            )
         },
         {
             id: 'intellectual-property',
             title: 'Intellectual Property',
             icon: '©️',
-            content: 'All content, features, and functionality of our service are owned by resume.io and are protected by international copyright, trademark, and other intellectual property laws.'
+            content: (
+                <>
+                    <p>All content, templates, and AI-generated outputs are the property of HireMeAI.</p>
+                    <ul className="list-disc ml-6 mt-2">
+                        <li>Users may not reproduce, distribute, or sell content generated through our platform</li>
+                    </ul>
+                </>
+            )
         },
         {
-            id: 'payment-terms',
-            title: 'Payment Terms',
-            icon: '💳',
-            content: 'If you choose a paid subscription, you agree to pay all fees in accordance with the pricing and payment terms presented to you. Fees are non-refundable except as required by law or as explicitly stated in our refund policy.'
-        },
-        {
-            id: 'service-modifications',
-            title: 'Service Modifications',
-            icon: '🔄',
-            content: 'We reserve the right to modify, suspend, or discontinue any part of our service at any time. We will notify you of significant changes to our service that affect your use.'
-        },
-        {
-            id: 'limitation-liability',
-            title: 'Limitation of Liability',
+            id: 'liability',
+            title: 'Liability & Disclaimers',
             icon: '⚠️',
-            content: 'To the maximum extent permitted by law, resume.io shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the service.'
+            content: (
+                <>
+                    <p>HireMeAI is not responsible for job placement guarantees.</p>
+                    <ul className="list-disc ml-6 mt-2">
+                        <li>We do not guarantee that AI-generated resumes will result in employment</li>
+                    </ul>
+                </>
+            )
         },
         {
             id: 'termination',
             title: 'Termination',
-            icon: '🚀',
-            content: 'We may terminate or suspend your account and access to our service immediately, without prior notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties.'
+            icon: '⛔',
+            content: (
+                <p>We reserve the right to terminate accounts violating our policies without prior notice.</p>
+            )
         }
+    ];
+
+    const navpills = [
+        { name: "Terms & Conditions", to: "/terms" },
+        { name: "Privacy Policy", to: "/privacy" },
+        { name: "Refund Policy", to: "/refunds" }
     ];
 
     const containerVariants = {
@@ -104,28 +122,6 @@ function TermsOfServicePage() {
         }
     };
 
-    const highlightVariants = {
-        inactive: { width: '0%' },
-        active: {
-            width: '100%',
-            transition: { duration: 0.3 }
-        }
-    };
-    const navpills = [
-        {
-            name: "right to withdraowl",
-            to: "/right-of-withdrawal"
-        },
-        {
-            name: "Terms of Service",
-            to: "/terms-of-service"
-        }, {
-            name: "cookie policy",
-            to: "/privacy"
-        }
-
-    ]
-
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-slate-100">
             {/* Navigation Bar */}
@@ -137,11 +133,11 @@ function TermsOfServicePage() {
                                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                             </svg>
                         </div>
-                        <div className="ml-2 text-xl font-bold text-blue-600">resume.io</div>
+                        <div className="ml-2 text-xl font-bold text-blue-600">HireMeAI</div>
                     </div>
                     <div className="hidden md:block">
                         <div className="flex space-x-4">
-                            {['Resume Templates', 'Resume Examples', 'Cover Letter', 'Resources', 'FAQ'].map((item) => (
+                            {['Resume Builder', 'Pricing', 'Resources', 'Support'].map((item) => (
                                 <a
                                     key={item}
                                     href="#"
@@ -172,7 +168,7 @@ function TermsOfServicePage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        Legal Documents
+                        Terms & Conditions
                     </motion.h1>
                     <motion.p
                         className="mt-5 max-w-xl mx-auto text-xl text-gray-500"
@@ -180,36 +176,26 @@ function TermsOfServicePage() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        All documents were updated
-                        <br />
-                        <span className="font-semibold">on July 20, 2022</span>
+                        Last Updated: July 20, 2022
                     </motion.p>
                 </div>
             </header>
 
             {/* Document Tabs */}
             <div className="bg-white shadow-sm border-t border-b border-gray-200">
-                <div className="bg-white shadow-sm border-t border-b border-gray-200">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex overflow-x-auto py-4 space-x-8 scrollbar-hide">
-                            {navpills.map((item) => (
-                                <motion.button
-                                    key={item.name}
-                                    className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${item === 'Cookie Policy'
-                                        ? 'bg-blue-100 text-blue-700'
-                                        : 'text-gray-600 hover:text-blue-600'
-                                        }`}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <Link to={item.to}>
-                                        {item.name}
-                                    </Link>
-
-
-                                </motion.button>
-                            ))}
-                        </div>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex overflow-x-auto py-4 space-x-8 scrollbar-hide">
+                        {navpills.map((item) => (
+                            <motion.button
+                                key={item.name}
+                                className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${item.name === 'Terms & Conditions' ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-blue-600'
+                                    }`}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <Link to={item.to}>{item.name}</Link>
+                            </motion.button>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -241,9 +227,9 @@ function TermsOfServicePage() {
                                     </span>
                                     <motion.div
                                         className="absolute bottom-0 left-0 h-0.5 bg-blue-500 rounded-full"
-                                        variants={highlightVariants}
-                                        initial="inactive"
-                                        animate={activeSection === section.id ? "active" : "inactive"}
+                                        initial={{ width: 0 }}
+                                        animate={{ width: activeSection === section.id ? '100%' : 0 }}
+                                        transition={{ duration: 0.3 }}
                                     />
                                 </motion.button>
                             ))}
@@ -254,7 +240,7 @@ function TermsOfServicePage() {
                     <main className="mt-8 lg:mt-0 lg:col-span-9">
                         <div className="bg-white overflow-hidden shadow rounded-lg">
                             <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-                                <h2 className="text-2xl font-bold text-gray-900">Terms of Service</h2>
+                                <h2 className="text-2xl font-bold text-gray-900">Terms & Conditions</h2>
                                 <p className="mt-1 text-sm text-gray-500">Last Updated: July 20, 2022</p>
                             </div>
                             <div className="px-4 py-5 sm:p-6">
@@ -275,8 +261,8 @@ function TermsOfServicePage() {
                                                 <span className="text-2xl mr-3">{section.icon}</span>
                                                 <h3 className="text-xl font-semibold text-gray-900">{section.title}</h3>
                                             </div>
-                                            <div className="mt-2 text-gray-700 leading-relaxed">
-                                                <p>{section.content}</p>
+                                            <div className="mt-2 text-gray-700 leading-relaxed space-y-3">
+                                                {section.content}
                                             </div>
                                             <div className="w-16 h-1 bg-blue-100 rounded-full mt-8"></div>
                                         </motion.section>
@@ -329,4 +315,4 @@ function TermsOfServicePage() {
     );
 }
 
-export default TermsOfServicePage;
+export default TermsAndConditions;

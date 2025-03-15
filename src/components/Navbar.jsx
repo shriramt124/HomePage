@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Logo from "../assets/logoHireme1.png"
 
 const ResumeNavbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,26 +19,52 @@ const ResumeNavbar = () => {
     {
       title: 'Resume Templates',
       dropdown: true,
-      items: ['Word', 'Simple', 'Professional', 'Modern', 'Creative', 'ATS']
+      to: '/resume-templates',
+      items: [
+        { title: 'Word', to: '/resume-templates/word' },
+        { title: 'Simple', to: '/resume-templates/simple' },
+        { title: 'Professional', to: '/resume-templates/professional' },
+        { title: 'Modern', to: '/resume-templates/modern' },
+        { title: 'Creative', to: '/resume-templates/creative' },
+        { title: 'ATS', to: '/resume-templates/ats' }
+      ]
     },
     {
       title: 'Resume Examples',
       dropdown: true,
-      items: ['Student', 'Professional', 'Executive', 'Career Change']
+      to: '/resume-examples',
+      items: [
+        { title: 'Student', to: '/resume-examples/student' },
+        { title: 'Professional', to: '/resume-examples/professional' },
+        { title: 'Executive', to: '/resume-examples/executive' },
+        { title: 'Career Change', to: '/resume-examples/career-change' }
+      ]
     },
     {
       title: 'Cover Letter',
       dropdown: true,
-      items: ['Templates', 'Examples', 'How to Write']
+      to: '/cover-letter',
+      items: [
+        { title: 'Templates', to: '/cover-letter/templates' },
+        { title: 'Examples', to: '/cover-letter/examples' },
+        { title: 'How to Write', to: '/cover-letter/how-to-write' }
+      ]
     },
     {
       title: 'Resources',
       dropdown: true,
-      items: ['Blog', 'Career Advice', 'Job Search']
+      to: '#',
+      items: [
+        { title: 'Blog', to: '/resources/blog' },
+        { title: 'Career Advice', to: '/resources/career-advice' },
+        { title: 'Job Search', to: '/resources/job-search' },
+        { title: 'Aboutus', to: '/about-us' }
+      ]
     },
     {
       title: 'FAQ',
-      dropdown: false
+      dropdown: false,
+      to: '/faq'
     }
   ];
 
@@ -50,34 +77,44 @@ const ResumeNavbar = () => {
       <nav className="relative py-4 px-4 md:px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center space-x-1">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-200"></div>
-            <span className="text-gray-800 font-bold text-xl">Hireme.io</span>
+          <div className="flex items-center space-x-1 justify-center text-center">
+            <Link to="/">
+              <img src={Logo} className='w-[150px]' />
+            </Link>
+              
+          
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-1 items-center">
             {navItems.map((item, index) => (
               <div key={index} className="relative group">
-                {item.title === 'FAQ' ? (
+                {item.dropdown ? (
                   <Link
-                    to="/faq"
+                    to={item.to}
+                    className="px-3 py-2 text-gray-700 hover:text-blue-500 flex items-center transition-colors duration-200 font-medium"
+                  >
+                    {item.title}
+                    <button
+                      className="ml-1 focus:outline-none"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleDropdown(index);
+                      }}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </button>
+                  </Link>
+                ) : (
+                  <Link
+                    to={item.to}
                     className="px-3 py-2 text-gray-700 hover:text-blue-500 flex items-center transition-colors duration-200 font-medium"
                   >
                     {item.title}
                   </Link>
-                ) : (
-                  <button
-                    className="px-3 py-2 text-gray-700 hover:text-blue-500 flex items-center transition-colors duration-200 font-medium"
-                    onClick={() => item.dropdown && toggleDropdown(index)}
-                  >
-                    {item.title}
-                    {item.dropdown && (
-                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                      </svg>
-                    )}
-                  </button>
                 )}
 
                 {/* Desktop Dropdown Menu */}
@@ -93,10 +130,10 @@ const ResumeNavbar = () => {
                       {item.items.map((subItem, subIndex) => (
                         <Link
                           key={subIndex}
-                          to={`/${item.title.toLowerCase().replace(' ', '-')}/${subItem.toLowerCase().replace(' ', '-')}`}
+                          to={subItem.to}
                           className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-500"
                         >
-                          {subItem}
+                          {subItem.title}
                         </Link>
                       ))}
                     </motion.div>
@@ -157,54 +194,62 @@ const ResumeNavbar = () => {
             <div className="px-4 py-3 space-y-3">
               {navItems.map((item, index) => (
                 <div key={index}>
-                  {item.title === 'FAQ' ? (
+                  {item.dropdown ? (
+                    <div>
+                      <Link
+                        to={item.to}
+                        className="w-full text-left px-3 py-2 text-gray-700 hover:text-blue-500 flex items-center justify-between"
+                      >
+                        {item.title}
+                        <button
+                          className={`w-4 h-4 transform ${activeDropdown === index ? 'rotate-180' : ''}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleDropdown(index);
+                          }}
+                        >
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                          </svg>
+                        </button>
+                      </Link>
+
+                      {/* Mobile Dropdown */}
+                      <AnimatePresence>
+                        {activeDropdown === index && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="pl-4 py-2 space-y-2 overflow-hidden"
+                          >
+                            {item.items.map((subItem, subIndex) => (
+                              <Link
+                                key={subIndex}
+                                to={subItem.to}
+                                className="block py-1 text-gray-600 hover:text-blue-500"
+                              >
+                                {subItem.title}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
                     <Link
-                      to="/faq"
+                      to={item.to}
                       className="w-full text-left px-3 py-2 text-gray-700 hover:text-blue-500 flex items-center justify-between"
                     >
                       {item.title}
                     </Link>
-                  ) : (
-                    <button
-                      className="w-full text-left px-3 py-2 text-gray-700 hover:text-blue-500 flex items-center justify-between"
-                      onClick={() => item.dropdown && toggleDropdown(index)}
-                    >
-                      {item.title}
-                      {item.dropdown && (
-                        <svg
-                          className={`w-4 h-4 transform ${activeDropdown === index ? 'rotate-180' : ''}`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                      )}
-                    </button>
                   )}
-
-                  {/* Mobile Dropdown */}
-                  <AnimatePresence>
-                    {item.dropdown && activeDropdown === index && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="pl-4 py-2 space-y-2 overflow-hidden"
-                      >
-                        {item.items.map((subItem, subIndex) => (
-                          <Link
-                            key={subIndex}
-                            to={`/${item.title.toLowerCase().replace(' ', '-')}/${subItem.toLowerCase().replace(' ', '-')}`}
-                            className="block py-1 text-gray-600 hover:text-blue-500"
-                          >
-                            {subItem}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </div>
               ))}
 

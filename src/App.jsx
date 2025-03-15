@@ -6,6 +6,7 @@ import ContactUsPage from './pages/ContactUsPage'
 import PrivacyPolicyPage from './pages/Privacy'
 import RightOfWithdrawalPage from './pages/RightOfWithdrawal'
 import TermsOfServicePage from './pages/TermsOfService'
+import Aboutus from './pages/Aboutus'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/privacy" element={<PrivacyPolicyPage />} />
       <Route path="/right-of-withdrawal" element={<RightOfWithdrawalPage />} />
       <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+      <Route path="/about-us" element={<Aboutus />} />
     </Routes>
   )
 }

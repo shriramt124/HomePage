@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-function RightOfWithdrawalPage() {
+
+function RefundsPolicy() {
     const [activeSection, setActiveSection] = useState(null);
     const [showBackToTop, setShowBackToTop] = useState(false);
 
@@ -34,68 +35,76 @@ function RightOfWithdrawalPage() {
 
     const policySections = [
         {
-            id: 'introduction',
-            title: 'Introduction',
-            icon: '📄',
-            content: 'This Right of Withdrawal policy outlines your rights to cancel or withdraw from any contract or purchase made on our platform. We are committed to ensuring transparency and fairness in all our transactions.'
+            id: 'cancellation',
+            title: 'Subscription Cancellation',
+            icon: '⛔',
+            content: (
+                <>
+                    <p>Users can cancel their subscription at any time through their account settings.</p>
+                    <ul className="list-disc ml-6 mt-2">
+                        <li>Access remains until the end of the current billing cycle</li>
+                        <li>No partial/prorated refunds for unused periods</li>
+                    </ul>
+                </>
+            )
         },
         {
-            id: 'withdrawal-period',
-            title: 'Withdrawal Period',
-            icon: '⏳',
-            content: 'You have the right to withdraw from any contract within 14 days without giving any reason. The withdrawal period will expire after 14 days from the day of the conclusion of the contract or receipt of goods.'
-        },
-        {
-            id: 'how-to-withdraw',
-            title: 'How to Exercise Your Right',
-            icon: '✍️',
-            content: 'To exercise your right of withdrawal, you must inform us of your decision by an unequivocal statement (e.g., a letter sent by post, fax, or email). You may use the model withdrawal form provided, but it is not obligatory.'
-        },
-        {
-            id: 'effects',
-            title: 'Effects of Withdrawal',
-            icon: '🔄',
-            content: 'If you withdraw from this contract, we shall reimburse all payments received from you, including the costs of delivery (with the exception of supplementary costs resulting from your choice of delivery). Reimbursement will be processed without undue delay.'
+            id: 'refunds',
+            title: 'Refund Policy',
+            icon: '💰',
+            content: (
+                <>
+                    <p>Refunds apply only in cases of:</p>
+                    <ul className="list-disc ml-6 mt-2">
+                        <li>Double charges</li>
+                        <li>System errors</li>
+                        <li>Undelivered services</li>
+                    </ul>
+                    <p className="mt-2">
+                        Requests must be made within <strong>7 days</strong> of purchase to{' '}
+                        <a href="mailto:info@hiremeai.in" className="text-blue-600">
+                            info@hiremeai.in
+                        </a>
+                    </p>
+                </>
+            )
         },
         {
             id: 'exceptions',
             title: 'Exceptions',
             icon: '⚠️',
-            content: 'The right of withdrawal does not apply to certain types of contracts, including fully performed services, sealed goods that are not suitable for return due to health protection or hygiene reasons, and custom-made goods.'
+            content: (
+                <>
+                    <p>No refunds for:</p>
+                    <ul className="list-disc ml-6 mt-2">
+                        <li>One-time purchases (templates, AI content)</li>
+                        <li>Custom services (resume reviews)</li>
+                    </ul>
+                </>
+            )
         },
         {
-            id: 'refund-process',
-            title: 'Refund Process',
-            icon: '💸',
-            content: 'We will carry out the reimbursement using the same means of payment as you used for the initial transaction unless expressly agreed otherwise. You will not incur any fees as a result of the reimbursement.'
-        },
-        {
-            id: 'return-shipping',
-            title: 'Return Shipping',
-            icon: '📦',
-            content: 'You will have to bear the direct cost of returning the goods. You are only liable for any diminished value of the goods resulting from handling other than what is necessary to establish the nature, characteristics, and functioning of the goods.'
-        },
-        {
-            id: 'contact',
-            title: 'Contact Us',
-            icon: '📧',
-            content: 'If you have any questions about our Right of Withdrawal policy, please contact our customer service team at support@example.com or through the contact information provided on our Site.'
+            id: 'disputes',
+            title: 'Disputes & Chargebacks',
+            icon: '⚖️',
+            content: (
+                <>
+                    <p>Contact support before initiating chargebacks:</p>
+                    <ul className="list-disc ml-6 mt-2">
+                        <li>Chargebacks may lead to account suspension</li>
+                        <li>Resolution required before service restoration</li>
+                    </ul>
+                </>
+            )
         }
     ];
-    const navpills = [
-        {
-            name: "right to withdraowl",
-            to: "/right-of-withdrawal"
-        },
-        {
-            name: "Terms of Service",
-            to: "/terms-of-service"
-        }, {
-            name: "cookie policy",
-            to: "/privacy"
-        }
 
-    ]
+    const navpills = [
+        { name: "Refunds Policy", to: "/refunds-policy" },
+        { name: "Terms of Service", to: "/terms" },
+        { name: "Privacy Policy", to: "/privacy" }
+    ];
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -116,14 +125,6 @@ function RightOfWithdrawalPage() {
         }
     };
 
-    const highlightVariants = {
-        inactive: { width: '0%' },
-        active: {
-            width: '100%',
-            transition: { duration: 0.3 }
-        }
-    };
-
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-slate-100">
             {/* Navigation Bar */}
@@ -135,11 +136,11 @@ function RightOfWithdrawalPage() {
                                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                             </svg>
                         </div>
-                        <div className="ml-2 text-xl font-bold text-blue-600">resume.io</div>
+                        <div className="ml-2 text-xl font-bold text-blue-600">HireMeAI</div>
                     </div>
                     <div className="hidden md:block">
                         <div className="flex space-x-4">
-                            {['Resume Templates', 'Resume Examples', 'Cover Letter', 'Resources', 'FAQ'].map((item) => (
+                            {['Resume Builder', 'Pricing', 'Resources', 'Support'].map((item) => (
                                 <a
                                     key={item}
                                     href="#"
@@ -170,7 +171,7 @@ function RightOfWithdrawalPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        Legal Documents
+                        Refunds & Cancellation Policy
                     </motion.h1>
                     <motion.p
                         className="mt-5 max-w-xl mx-auto text-xl text-gray-500"
@@ -178,36 +179,26 @@ function RightOfWithdrawalPage() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        All documents were updated
-                        <br />
-                        <span className="font-semibold">on July 20, 2022</span>
+                        Last Updated: July 20, 2022
                     </motion.p>
                 </div>
             </header>
 
             {/* Document Tabs */}
             <div className="bg-white shadow-sm border-t border-b border-gray-200">
-                <div className="bg-white shadow-sm border-t border-b border-gray-200">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex overflow-x-auto py-4 space-x-8 scrollbar-hide">
-                            {navpills.map((item) => (
-                                <motion.button
-                                    key={item.name}
-                                    className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${item === 'Cookie Policy'
-                                        ? 'bg-blue-100 text-blue-700'
-                                        : 'text-gray-600 hover:text-blue-600'
-                                        }`}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <Link to={item.to}>
-                                        {item.name}
-                                    </Link>
-
-
-                                </motion.button>
-                            ))}
-                        </div>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex overflow-x-auto py-4 space-x-8 scrollbar-hide">
+                        {navpills.map((item) => (
+                            <motion.button
+                                key={item.name}
+                                className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${item.name === 'Refunds Policy' ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-blue-600'
+                                    }`}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <Link to={item.to}>{item.name}</Link>
+                            </motion.button>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -239,9 +230,9 @@ function RightOfWithdrawalPage() {
                                     </span>
                                     <motion.div
                                         className="absolute bottom-0 left-0 h-0.5 bg-blue-500 rounded-full"
-                                        variants={highlightVariants}
-                                        initial="inactive"
-                                        animate={activeSection === section.id ? "active" : "inactive"}
+                                        initial={{ width: 0 }}
+                                        animate={{ width: activeSection === section.id ? '100%' : 0 }}
+                                        transition={{ duration: 0.3 }}
                                     />
                                 </motion.button>
                             ))}
@@ -252,7 +243,7 @@ function RightOfWithdrawalPage() {
                     <main className="mt-8 lg:mt-0 lg:col-span-9">
                         <div className="bg-white overflow-hidden shadow rounded-lg">
                             <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-                                <h2 className="text-2xl font-bold text-gray-900">Right of Withdrawal</h2>
+                                <h2 className="text-2xl font-bold text-gray-900">Refunds & Cancellation Policy</h2>
                                 <p className="mt-1 text-sm text-gray-500">Last Updated: July 20, 2022</p>
                             </div>
                             <div className="px-4 py-5 sm:p-6">
@@ -273,8 +264,8 @@ function RightOfWithdrawalPage() {
                                                 <span className="text-2xl mr-3">{section.icon}</span>
                                                 <h3 className="text-xl font-semibold text-gray-900">{section.title}</h3>
                                             </div>
-                                            <div className="mt-2 text-gray-700 leading-relaxed">
-                                                <p>{section.content}</p>
+                                            <div className="mt-2 text-gray-700 leading-relaxed space-y-3">
+                                                {section.content}
                                             </div>
                                             <div className="w-16 h-1 bg-blue-100 rounded-full mt-8"></div>
                                         </motion.section>
@@ -327,4 +318,4 @@ function RightOfWithdrawalPage() {
     );
 }
 
-export default RightOfWithdrawalPage;
+export default RefundsPolicy;
