@@ -19,7 +19,7 @@ const ResumeNavbar = () => {
     {
       title: 'Resume Templates',
       dropdown: true,
-      to: '/resume-templates',
+      to: '/',
       items: [
         { title: 'Word', to: '/resume-templates/word' },
         { title: 'Simple', to: '/resume-templates/simple' },
@@ -32,7 +32,7 @@ const ResumeNavbar = () => {
     {
       title: 'Resume Examples',
       dropdown: true,
-      to: '/resume-examples',
+      to: '/',
       items: [
         { title: 'Student', to: '/resume-examples/student' },
         { title: 'Professional', to: '/resume-examples/professional' },
@@ -43,7 +43,7 @@ const ResumeNavbar = () => {
     {
       title: 'Cover Letter',
       dropdown: true,
-      to: '/cover-letter',
+     to: '/',
       items: [
         { title: 'Templates', to: '/cover-letter/templates' },
         { title: 'Examples', to: '/cover-letter/examples' },
@@ -53,11 +53,11 @@ const ResumeNavbar = () => {
     {
       title: 'Resources',
       dropdown: true,
-      to: '#',
+      to: '/',
       items: [
-        { title: 'Blog', to: '/resources/blog' },
-        { title: 'Career Advice', to: '/resources/career-advice' },
-        { title: 'Job Search', to: '/resources/job-search' },
+        { title: 'Blog',   to: '#' },
+        { title: 'Career Advice', to: '#' },
+        { title: 'Job Search', to: '#' },
         { title: 'Aboutus', to: '/about-us' }
       ]
     },
